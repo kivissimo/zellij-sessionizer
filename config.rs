@@ -19,7 +19,7 @@ impl Default for Config {
             root_dirs: vec![PathBuf::from(ROOT)],
             individual_dirs: vec![],
             layout: LayoutInfo::BuiltIn("default".to_string()),
-            show_sessions: true,
+            show_sessions: false,
         }
     }
 }
@@ -53,8 +53,8 @@ impl From<BTreeMap<String, String>> for Config {
         };
         let show_sessions = config
             .get("show_sessions")
-            .map(|v| v != "false")
-            .unwrap_or(true);
+            .map(|v| v == "true")
+            .unwrap_or(false);
         Self {
             root_dirs,
             individual_dirs,
